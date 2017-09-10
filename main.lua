@@ -19,7 +19,7 @@ opt = {
   saveIter = 1000,    -- write check point on this interval
   niter = 100,          -- number of iterations through dataset
   ntrain = math.huge,   -- how big one epoch should be
-  gpu = 1,              -- which GPU to use; consider using CUDA_VISIBLE_DEVICES instead
+  gpu = 0,              -- which GPU to use; consider using CUDA_VISIBLE_DEVICES instead
   cudnn = 1,            -- whether to use cudnn or not
   finetune = '',        -- if set, will load this network instead of starting from scratch
   name = 'beach100',        -- the name of the experiment
@@ -28,8 +28,9 @@ opt = {
   display_port = 8001,  -- port to push graphs
   display_id = 1,       -- window ID when pushing graphs
   mean = {0,0,0},
-  data_root = '/data/vision/torralba/crossmodal/flickr_videos/',
-  data_list = '/data/vision/torralba/crossmodal/flickr_videos/scene_extract/lists-full/_b_beach.txt.train',
+  data_root = '/home/sammer/Master_Thesis/Research/Code/videogan/data/vision/torralba/crossmodal/flickr_videos/',
+  data_list = '/home/sammer/Master_Thesis/Research/Code/videogan/data/vision/torralba/crossmodal/flickr_videos/scene_extract/lists-full/_b_beach.txt.train',
+
 }
 
 -- one-line argument parser. parses enviroment variables to override the defaults

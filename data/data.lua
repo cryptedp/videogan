@@ -22,6 +22,8 @@ function data.new(n, dataset_name, opt_)
        donkey_file = 'donkey_video2.lua'
    elseif dataset_name == 'video3' then
        donkey_file = 'donkey_video3.lua'
+   elseif dataset_name == 'activity' then 
+	donkey_file = 'activity_net.lua'
    else
       error('Unknown dataset: ' .. dataset_name)
    end
