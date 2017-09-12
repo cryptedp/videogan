@@ -5,7 +5,7 @@ require 'optim'
 -- to specify these at runtime, you can do, e.g.:
 --    $ lr=0.001 th main.lua
 opt = {
-  dataset = 'video2',   -- indicates what dataset load to use (in data.lua)
+  dataset = 'activityNet',   -- indicates what dataset load to use (in data.lua)
   nThreads = 32,        -- how many threads to pre-fetch data
   batchSize = 64,      -- self-explanatory
   loadSize = 128,       -- when loading images, resize first to this size
