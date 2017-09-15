@@ -5,7 +5,7 @@ require 'optim'
 -- to specify these at runtime, you can do, e.g.:
 --    $ lr=0.001 th main.lua
 opt = {
-  dataset = 'activityNet',   -- indicates what dataset load to use (in data.lua)
+  dataset = 'activity',   -- indicates what dataset load to use (in data.lua)
   nThreads = 32,        -- how many threads to pre-fetch data
   batchSize = 64,      -- self-explanatory
   loadSize = 128,       -- when loading images, resize first to this size
@@ -28,8 +28,8 @@ opt = {
   display_port = 8001,  -- port to push graphs
   display_id = 1,       -- window ID when pushing graphs
   mean = {0,0,0},
-  data_root = '/home/sammer/Master_Thesis/Research/Code/videogan/data/vision/torralba/crossmodal/flickr_videos/',
-  data_list = '/home/sammer/Master_Thesis/Research/Code/videogan/data/vision/torralba/crossmodal/flickr_videos/scene_extract/lists-full/_b_beach.txt.train',
+  data_root = '/data/sammer/activityNet',
+  --data_list = '/home/sammer/Master_Thesis/Research/Code/videogan/data/vision/torralba/crossmodal/flickr_videos/scene_extract/lists-full/_b_beach.txt.train',
 
 }
 
