@@ -22,7 +22,7 @@ FRAMES_DELAY = 2
 def get_video_info(video):
     stats = subprocess.check_output("ffprobe -select_streams v -v error -show_entries stream=width,height,duration -of default=noprint_wrappers=1 {}".format(video), shell = True)
     info = dict(x.split("=") for x in stats.strip().split("\n"))
-    print info
+    print (info)
     return {"width": int(info['width']),
             "height": int(info['height']),
             "duration": float(info['duration'])}
@@ -135,11 +135,11 @@ def compute(video, frame_dir):
             #img1 = cv2.imread(im1,0)
             kp1, des1 = sift.detectAndCompute(img1,None)
             if des1 is None or des2 is None:
-                print "Empty matches"
+                print ("Empty matches")
                 M = np.eye(3)
                 failed = True
             elif len(kp1) < 2 or len(kp2) < 2:
-                print "Not enough key points"
+                print ("Not enough key points")
                 M = np.eye(3)
                 failed = True
             else:
@@ -156,7 +156,7 @@ def compute(video, frame_dir):
 
                     M, mask = cv2.findHomography(src_pts, dst_pts, cv2.RANSAC,5.0)
                 else:
-                    print "Not enough matches are found - %d/%d" % (len(good),MIN_MATCH_COUNT)
+                    print ("Not enough matches are found - %d/%d" % (len(good),MIN_MATCH_COUNT))
 
                     M = np.eye(3)
                     failed = True
