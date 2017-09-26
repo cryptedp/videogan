@@ -214,10 +214,10 @@ def compute(video, frame_dir):
 def get_stable_path(dir, video):
     #return "frames-stable/{}".format(video)
     path = dir+"/frames-stable-many/{}".format(video)
-    return path 
+    return path
 
 dir = '/media/sammer/Seagate Backup Plus Drive/activitNet/segments'
-work =os.listdir(dir)
+work =[f for f in os.listdir(dir) if os.path.isfile(os.path.join(dir,f))]
 #work = [x.strip() for x in open("scene_extract/job_list.txt")]
 
 
