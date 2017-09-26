@@ -8,6 +8,7 @@ import json
 import os
 import argparse
 import subprocess
+import glob
 import random
 from scipy.ndimage.filters import gaussian_filter
 
@@ -91,7 +92,7 @@ def compute(video, frame_dir):
     try:
         frames = FrameReader(video)
     except subprocess.CalledProcessError:
-        print "failed due to CalledProcessError"
+        print ("failed due to CalledProcessError")
         return False
 
     for _ in range(FRAMES_DELAY):
@@ -116,7 +117,7 @@ def compute(video, frame_dir):
         try:
             img2 = frames.next()
         except StopIteration:
-            print "end of stream"
+            print ("end of stream")
             break
 
         bg_img = process_im(img2.copy())
@@ -191,18 +192,18 @@ def compute(video, frame_dir):
                 break
 
         if len(movie) < MIN_FRAMES:
-            print "this movie clip is too short, causing fail"
+            print ("this movie clip is too short, causing fail")
             failed = True
 
         if failed:
-            print "aborting movie clip due to failure"
+            print ("aborting movie clip due to failure")
         else:   
             # write a column stacked image so it can be loaded at once, which
             # will hopefully reduce IO significantly
             stacked = np.vstack(movie)
             movie_clip_filename = frame_dir + "/%04d.jpg" % movie_clip
             movie_clip_files.append(movie_clip_filename)
-            print "writing {}".format(movie_clip_filename)
+            print ("writing {}".format(movie_clip_filename))
             cv2.imwrite(movie_clip_filename, stacked)
             movie_clip += 1
 
@@ -210,19 +211,22 @@ def compute(video, frame_dir):
 
     open(frame_dir + "/list.txt", "w").write("\n".join(movie_clip_files))
 
-def get_stable_path(video):
+def get_stable_path(dir, video):
     #return "frames-stable/{}".format(video)
-    return "frames-stable-many/{}".format(video)
+    path = dir+"/frames-stable-many/{}".format(video)
+    return path 
 
-work = [x.strip() for x in open("scene_extract/job_list.txt")]
-random.shuffle(work)
+dir = '/media/sammer/Seagate Backup Plus Drive/activitNet/segments'
+work =os.listdir(dir)
+#work = [x.strip() for x in open("scene_extract/job_list.txt")]
+
 
 for video in work:
-    stable_path = get_stable_path(video)
+    stable_path = get_stable_path(dir, video)
     lock_file = stable_path + ".lock"
 
     if os.path.exists(stable_path) or os.path.exists(lock_file):
-        print "already done: {}".format(stable_path)
+        print ("already done: {}".format(stable_path))
         continue
 
     try:
@@ -238,7 +242,7 @@ for video in work:
     except OSError:
         pass
 
-    print video
+    print (video)
 
     #result = compute("videos/" + video, stable_path)
     result = compute(video, stable_path)
